@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.databinding.FragmentBoardBinding
+import com.beam.tictactoexml.domain.GameState
 import kotlinx.coroutines.launch
 
 class BoardFragment : Fragment(R.layout.fragment_board) {
@@ -24,10 +25,22 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
-                    // TODO: Add logic to update the view according the state value
-                    message.text = state.todo
+                    when(state.gameState) {
+                        GameState.NotStarted -> bindNotStarted()
+                    }
                 }
             }
         }
+    }
+
+    private fun FragmentBoardBinding.bindNotStarted() {
+        boardView.visibility = View.GONE
+
+        message.text = getString(R.string.welcome)
+        message.visibility = View.VISIBLE
+
+        startBtn.text = getString(R.string.start_game)
+        startBtn.visibility = View.VISIBLE
+        startBtn.setOnClickListener { viewModel.startGame() }
     }
 }
