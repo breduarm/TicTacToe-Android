@@ -27,6 +27,7 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
                 viewModel.state.collect { state ->
                     when(state.gameState) {
                         GameState.NotStarted -> bindNotStarted()
+                        GameState.InProgress -> bindInProgress()
                     }
                 }
             }
@@ -42,5 +43,11 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
         startBtn.text = getString(R.string.start_game)
         startBtn.visibility = View.VISIBLE
         startBtn.setOnClickListener { viewModel.startGame() }
+    }
+
+    private fun FragmentBoardBinding.bindInProgress() {
+        boardView.visibility = View.VISIBLE
+        message.visibility = View.GONE
+        startBtn.visibility = View.GONE
     }
 }

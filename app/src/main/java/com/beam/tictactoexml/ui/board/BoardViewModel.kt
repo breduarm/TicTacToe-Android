@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.beam.tictactoexml.domain.GameState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class BoardViewModel : ViewModel() {
 
@@ -17,7 +18,8 @@ class BoardViewModel : ViewModel() {
     }
 
     fun startGame() {
-        TODO("Not yet implemented")
+        userStartedGame = true
+        _state.update { it.copy(gameState = GameState.InProgress) }
     }
 
     data class UiState(
