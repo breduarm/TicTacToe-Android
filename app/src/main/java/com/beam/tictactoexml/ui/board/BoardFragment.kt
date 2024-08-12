@@ -10,8 +10,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.databinding.FragmentBoardBinding
 import com.beam.tictactoexml.domain.GameState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class BoardFragment : Fragment(R.layout.fragment_board) {
 
     private val viewModel: BoardViewModel by viewModels()
@@ -22,6 +24,8 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
     }
 
     private fun FragmentBoardBinding.init() {
+        boardView.onClick = viewModel::move
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { state ->
