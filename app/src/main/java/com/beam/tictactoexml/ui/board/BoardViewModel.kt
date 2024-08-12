@@ -3,11 +3,14 @@ package com.beam.tictactoexml.ui.board
 import androidx.lifecycle.ViewModel
 import com.beam.tictactoexml.domain.GameState
 import com.beam.tictactoexml.domain.TicTacToe
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
-class BoardViewModel : ViewModel() {
+@HiltViewModel
+class BoardViewModel @Inject constructor() : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
     val state = _state.asStateFlow()

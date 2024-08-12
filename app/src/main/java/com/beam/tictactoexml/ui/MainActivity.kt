@@ -9,7 +9,9 @@ import com.beam.tictactoexml.databinding.ActivityMainBinding
 import com.beam.tictactoexml.ui.board.BoardFragment
 import com.beam.tictactoexml.ui.games.GamesFragment
 import com.beam.tictactoexml.ui.scoreboard.ScoreboardFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

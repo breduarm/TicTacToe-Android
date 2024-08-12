@@ -1,6 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+
+    // DI
+    alias(libs.plugins.android.hilt)
+
+    // Kotlin
+    kotlin("kapt")
 }
 
 android {
@@ -50,6 +56,10 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment.ktx)
+
+    // DI
+    implementation(libs.android.hilt)
+    kapt(libs.android.hilt.compiler)
 
     // Testing
     testImplementation(libs.junit)
