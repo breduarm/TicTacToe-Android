@@ -5,6 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import com.beam.tictactoexml.databinding.ViewBoardBinding
+import com.beam.tictactoexml.domain.CellValue
+import com.beam.tictactoexml.domain.GameState
+import com.beam.tictactoexml.domain.GameState.InProgress
 
 class BoardView @JvmOverloads constructor(
     context: Context,
@@ -31,5 +34,20 @@ class BoardView @JvmOverloads constructor(
             btn21.setOnClickListener { onClick(2, 1) }
             btn22.setOnClickListener { onClick(2, 2) }
         }
+    }
+
+    fun update(state: BoardViewModel.UiState) = with(binding) {
+        val board: List<List<CellValue>> = state.ticTacToe.board
+        val gameState: GameState = state.gameState
+
+        btn00.update(board[0][0].toString(), enabled = gameState == InProgress)
+        btn01.update(board[0][1].toString(), enabled = gameState == InProgress)
+        btn02.update(board[0][2].toString(), enabled = gameState == InProgress)
+        btn10.update(board[1][0].toString(), enabled = gameState == InProgress)
+        btn11.update(board[1][1].toString(), enabled = gameState == InProgress)
+        btn12.update(board[1][2].toString(), enabled = gameState == InProgress)
+        btn20.update(board[2][0].toString(), enabled = gameState == InProgress)
+        btn21.update(board[2][1].toString(), enabled = gameState == InProgress)
+        btn22.update(board[2][2].toString(), enabled = gameState == InProgress)
     }
 }

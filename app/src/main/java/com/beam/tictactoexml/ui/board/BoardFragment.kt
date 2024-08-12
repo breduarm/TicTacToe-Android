@@ -29,6 +29,7 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
                         GameState.NotStarted -> bindNotStarted()
                         GameState.InProgress -> bindInProgress()
                     }
+                    boardView.update(state)
                 }
             }
         }

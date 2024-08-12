@@ -2,6 +2,7 @@ package com.beam.tictactoexml.ui.board
 
 import androidx.lifecycle.ViewModel
 import com.beam.tictactoexml.domain.GameState
+import com.beam.tictactoexml.domain.TicTacToe
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -23,6 +24,7 @@ class BoardViewModel : ViewModel() {
     }
 
     data class UiState(
+        val ticTacToe: TicTacToe = TicTacToe(),
         val gameState: GameState = GameState.NotStarted,
     )
 }
