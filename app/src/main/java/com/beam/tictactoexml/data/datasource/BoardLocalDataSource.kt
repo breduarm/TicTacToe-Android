@@ -27,7 +27,7 @@ class BoardDataSource @Inject constructor() : BoardLocalDataSource {
     }
 
     override suspend fun reset() {
-        TODO("Not yet implemented")
+        currBoard.value = emptyList()
     }
 }
 

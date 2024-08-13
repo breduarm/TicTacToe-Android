@@ -8,5 +8,7 @@ fun TicTacToe.move(moveRow: Int, moveColumn: Int): TicTacToe {
         }
     }
 
-    return copy(board = newBoard)
+    return TicTacToe(board = newBoard, currentPlayer = nextPlayer())
 }
+
+private fun TicTacToe.nextPlayer(): Player = if (currentPlayer == X) O else X
