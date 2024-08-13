@@ -9,7 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.databinding.FragmentBoardBinding
+import com.beam.tictactoexml.domain.Draw
 import com.beam.tictactoexml.domain.GameState
+import com.beam.tictactoexml.domain.O
+import com.beam.tictactoexml.domain.Winner
+import com.beam.tictactoexml.domain.X
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -32,6 +36,7 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
                     when(state.gameState) {
                         GameState.NotStarted -> bindNotStarted()
                         GameState.InProgress -> bindInProgress()
+                        is GameState.Finished -> bindFinished(state.gameState.winner)
                     }
                     boardView.update(state)
                 }
@@ -54,5 +59,19 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
         boardView.visibility = View.VISIBLE
         message.visibility = View.GONE
         startBtn.visibility = View.GONE
+    }
+
+    private fun FragmentBoardBinding.bindFinished(winner: Winner) {
+        boardView.visibility = View.GONE
+
+        message.visibility = View.VISIBLE
+        message.text = when(winner) {
+            Draw -> getString(R.string.draw)
+            X, O -> getString(R.string.winner, winner.toString())
+        }
+
+        startBtn.visibility = View.VISIBLE
+        startBtn.text = getString(R.string.play_again)
+        startBtn.setOnClickListener { viewModel.startGame() }
     }
 }
