@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface BoardLocalDataSource {
     val board: Flow<TicTacToe>
@@ -14,6 +15,7 @@ interface BoardLocalDataSource {
     suspend fun reset()
 }
 
+@Singleton
 class BoardDataSource @Inject constructor() : BoardLocalDataSource {
     private val currBoard: MutableStateFlow<List<Move>> = MutableStateFlow(emptyList())
 
@@ -29,8 +31,6 @@ class BoardDataSource @Inject constructor() : BoardLocalDataSource {
     }
 }
 
-private fun List<Move>.toTicTacToe(): TicTacToe {
-    return fold(TicTacToe()) { acc, move ->
-        acc.move(move.row, move.column)
-    }
+fun List<Move>.toTicTacToe(): TicTacToe = fold(TicTacToe()) { acc, move ->
+    acc.move(move.row, move.column)
 }

@@ -2,8 +2,10 @@ package com.beam.tictactoexml.ui.board
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.beam.tictactoexml.data.datasource.BoardDataSource
 import com.beam.tictactoexml.domain.GameState
 import com.beam.tictactoexml.domain.TicTacToe
+import com.beam.tictactoexml.usecases.GetCurrentBoardUseCase
 import com.beam.tictactoexml.usecases.MakeBoardMoveUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BoardViewModel @Inject constructor(
+    private val getCurrentBoardUseCase: GetCurrentBoardUseCase,
     private val makeBoardMoveUseCase: MakeBoardMoveUseCase,
 ) : ViewModel() {
 
@@ -23,7 +26,17 @@ class BoardViewModel @Inject constructor(
     private var userStartedGame = false
 
     init {
-        _state.value = UiState(gameState = GameState.NotStarted)
+        viewModelScope.launch {
+            getCurrentBoardUseCase().collect { board ->
+                _state.value = UiState(
+                    ticTacToe = board,
+                    gameState = when {
+                        userStartedGame -> GameState.InProgress
+                        else -> GameState.NotStarted
+                    }
+                )
+            }
+        }
     }
 
     fun startGame() {
