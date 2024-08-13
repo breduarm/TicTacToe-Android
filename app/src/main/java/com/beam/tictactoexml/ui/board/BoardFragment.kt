@@ -72,6 +72,6 @@ class BoardFragment : Fragment(R.layout.fragment_board) {
 
         startBtn.visibility = View.VISIBLE
         startBtn.text = getString(R.string.play_again)
-        startBtn.setOnClickListener { viewModel.startGame() }
+        startBtn.setOnClickListener { viewModel.resetGame() }
     }
 }

@@ -2,13 +2,13 @@ package com.beam.tictactoexml.ui.board
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.beam.tictactoexml.data.datasource.BoardDataSource
 import com.beam.tictactoexml.domain.GameState
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.domain.Winner
 import com.beam.tictactoexml.domain.findWinner
 import com.beam.tictactoexml.usecases.GetCurrentBoardUseCase
 import com.beam.tictactoexml.usecases.MakeBoardMoveUseCase
+import com.beam.tictactoexml.usecases.ResetBoardUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,6 +20,7 @@ import javax.inject.Inject
 class BoardViewModel @Inject constructor(
     private val getCurrentBoardUseCase: GetCurrentBoardUseCase,
     private val makeBoardMoveUseCase: MakeBoardMoveUseCase,
+    private val resetBoardUseCase: ResetBoardUseCase,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -51,6 +52,12 @@ class BoardViewModel @Inject constructor(
     fun move(row: Int, column: Int) {
         viewModelScope.launch {
             makeBoardMoveUseCase(row, column)
+        }
+    }
+
+    fun resetGame() {
+        viewModelScope.launch {
+            resetBoardUseCase()
         }
     }
 

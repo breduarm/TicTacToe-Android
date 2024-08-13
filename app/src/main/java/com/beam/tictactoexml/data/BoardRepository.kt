@@ -11,4 +11,8 @@ class BoardRepository @Inject constructor(private val localDataSource: BoardLoca
     suspend fun move(row: Int, column: Int) {
         localDataSource.saveMove(row, column)
     }
+
+    suspend fun reset() {
+        localDataSource.reset()
+    }
 }
