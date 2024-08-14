@@ -17,8 +17,13 @@ fun TicTacToe.findWinner(): Winner? {
     return when {
         isWinner(X) -> X
         isWinner(O) -> O
+        isBoardComplete() -> Draw
         else -> null
     }
+}
+
+private fun TicTacToe.isBoardComplete(): Boolean {
+    return board.flatten().none { it == Empty }
 }
 
 private fun TicTacToe.isWinner(player: Player): Boolean {
