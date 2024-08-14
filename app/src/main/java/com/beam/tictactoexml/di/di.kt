@@ -2,6 +2,8 @@ package com.beam.tictactoexml.di
 
 import com.beam.tictactoexml.data.datasource.BoardDataSource
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
+import com.beam.tictactoexml.data.datasource.ScoreDataSource
+import com.beam.tictactoexml.data.datasource.ScoreLocalDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,4 +15,7 @@ abstract class AppDataModule {
 
     @Binds
     abstract fun bindBoardDataSource(impl: BoardDataSource): BoardLocalDataSource
+
+    @Binds
+    abstract fun bindScoreDataSource(impl: ScoreDataSource): ScoreLocalDataSource
 }
