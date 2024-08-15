@@ -16,6 +16,7 @@ hilt = "2.50"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+coroutinesTest = "1.6.0"
 mockk = "1.13.12"
 
 [libraries]
@@ -35,7 +36,7 @@ android-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-# "io.mockk:mockk:1.13.3"
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 [plugins]
