@@ -24,11 +24,12 @@ class ScoreboardFragment : Fragment(R.layout.fragment_scoreboard) {
     }
 
     private fun FragmentScoreboardBinding.init() {
+        val adapter = ScoreboardAdapter()
+        score.adapter = adapter
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.scores.collect {
-                    // TODO: Update UI
-                }
+                viewModel.scores.collect(adapter::submitList)
             }
         }
     }
