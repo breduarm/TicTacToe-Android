@@ -13,24 +13,23 @@ fun TicTacToe.move(moveRow: Int, moveColumn: Int): TicTacToe {
 
 private fun TicTacToe.nextPlayer(): Player = if (currentPlayer == X) O else X
 
-fun TicTacToe.findWinner(): Winner? {
-    return when {
-        isWinner(X) -> X
-        isWinner(O) -> O
-        isBoardComplete() -> Draw
-        else -> null
-    }
+fun TicTacToe.findWinner(): Winner? = when {
+    isWinner(X) -> X
+    isWinner(O) -> O
+    isBoardComplete() -> Draw
+    else -> null
 }
 
-private fun TicTacToe.isBoardComplete(): Boolean {
-    return board.flatten().none { it == Empty }
-}
-
-private fun TicTacToe.isWinner(player: Player): Boolean {
-    return board.any { row -> row.all { it == player } } ||
+private fun TicTacToe.isWinner(player: Player): Boolean =
+    board.any { row -> row.all { it == player } } ||
             board[0][0] == player && board[1][1] == player && board[2][2] == player ||
             board[0][2] == player && board[1][1] == player && board[2][0] == player ||
             board[0][0] == player && board[1][0] == player && board[2][0] == player ||
             board[0][1] == player && board[1][1] == player && board[2][1] == player ||
             board[0][2] == player && board[1][2] == player && board[2][2] == player
-}
+
+
+private fun TicTacToe.isBoardComplete(): Boolean =
+    board.flatten().none { it == Empty }
+
+fun TicTacToe.numberOfMoves(): Int = board.flatten().count { it != Empty }

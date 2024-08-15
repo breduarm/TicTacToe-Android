@@ -29,9 +29,11 @@ class ScoreboardAdapter : ListAdapter<Score, ScoreboardAdapter.ScoreViewHolder>(
         private val binding = ItemScoreBinding.bind(view)
 
         fun bind(score: Score) {
+            val numberOfMoves: String =
+                binding.root.context.getString(R.string.number_of_moves, score.numberOfMoves)
             binding.apply {
                 winner.text = score.winner.toString()
-                numberMoves.text = score.numberOfMoves.toString()
+                numberMoves.text = numberOfMoves
                 date.text = score.date.formatToString()
 
             }

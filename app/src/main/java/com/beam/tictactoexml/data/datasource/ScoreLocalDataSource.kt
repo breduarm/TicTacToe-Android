@@ -4,12 +4,14 @@ import com.beam.tictactoexml.domain.Score
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
+import javax.inject.Singleton
 
 interface ScoreLocalDataSource {
     val scores: Flow<List<Score>>
     suspend fun addScore(score: Score)
 }
 
+@Singleton
 class ScoreDataSource @Inject constructor() : ScoreLocalDataSource {
     private val _scores: MutableStateFlow<List<Score>> = MutableStateFlow(emptyList())
 
