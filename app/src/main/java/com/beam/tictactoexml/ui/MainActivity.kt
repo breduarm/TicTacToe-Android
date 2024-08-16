@@ -1,7 +1,6 @@
 package com.beam.tictactoexml.ui
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
 import com.beam.tictactoexml.R
@@ -18,7 +17,6 @@ class MainActivity : AppCompatActivity() {
 
         ActivityMainBinding.inflate(layoutInflater).apply {
             setContentView(root)
-            enableEdgeToEdge()
 
             bottomNavigation.setOnItemSelectedListener { item ->
                 when (item.itemId) {
