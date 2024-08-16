@@ -19,7 +19,7 @@ class BoardRepositoryTest {
     private val expectedBoard = TicTacToe()
 
     @Test
-    fun `when board is called, then return board from remote data source`() = runTest {
+    fun `when board is called, then return board from local data source`() = runTest {
         val localDataSource: BoardLocalDataSource = mockk {
             every { board } returns flowOf(expectedBoard)
         }
