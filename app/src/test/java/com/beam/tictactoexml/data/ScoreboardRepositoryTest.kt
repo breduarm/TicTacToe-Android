@@ -6,27 +6,40 @@ import com.beam.tictactoexml.domain.X
 import io.mockk.coJustRun
 import io.mockk.coVerify
 import io.mockk.every
-import io.mockk.mockk
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit4.MockKRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import java.util.Date
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ScoreboardRepositoryTest  {
 
+    @get:Rule
+    val rule = MockKRule(this)
+
+    @MockK
+    lateinit var localDataSource: ScoreLocalDataSource
+
+    private lateinit var scoreboardRepository: ScoreboardRepository
+
     private val expectedScores: List<Score> = emptyList()
+
+    @Before
+    fun setUp() {
+        every { localDataSource.scores } returns flowOf(expectedScores)
+        coJustRun { localDataSource.addScore(any()) }
+        scoreboardRepository = ScoreboardRepository(localDataSource)
+    }
 
     @Test
     fun `When scores is called, then return scores from local data source`() = runTest {
-        val localDataSource: ScoreLocalDataSource = mockk {
-            every { scores } returns flowOf(expectedScores)
-        }
-        val scoreboardRepository = ScoreboardRepository(localDataSource)
-
         val actualScores: List<Score> = scoreboardRepository.scores.first()
 
         assertEquals(expectedScores, actualScores)
@@ -39,12 +52,6 @@ class ScoreboardRepositoryTest  {
             numberOfMoves = 1,
             date = Date()
         )
-        val localDataSource: ScoreLocalDataSource = mockk {
-            every { scores } returns flowOf(expectedScores)
-            coJustRun { addScore(any()) }
-        }
-        val scoreboardRepository = ScoreboardRepository(localDataSource)
-
         scoreboardRepository.addScores(scoreMock)
 
         coVerify { localDataSource.addScore(scoreMock) }
