@@ -1,7 +1,7 @@
 package com.beam.tictactoexml.data
 
 import com.beam.tictactoexml.data.datasource.GamesLocalDataSource
-import com.beam.tictactoexml.domain.Game
+import com.beam.tictactoexml.domain.VideoGame
 import javax.inject.Inject
 
 class GamesRepository @Inject constructor(
@@ -10,7 +10,7 @@ class GamesRepository @Inject constructor(
 
     val games = localDataSource.games
 
-    suspend fun addGame(game: Game) {
-        localDataSource.addGame(game)
+    suspend fun addGame(videoGame: VideoGame) {
+        localDataSource.addGame(videoGame)
     }
 }
