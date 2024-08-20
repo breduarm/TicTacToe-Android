@@ -5,9 +5,9 @@ import com.beam.tictactoexml.domain.VideoGame
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetGamesUseCase @Inject constructor(
+class GetPopularGamesUseCase @Inject constructor(
     private val gamesRepository: GamesRepository,
 ) {
 
-    operator fun invoke(): Flow<List<VideoGame>> = gamesRepository.games
+    operator fun invoke(): Flow<List<VideoGame>> = gamesRepository.remoteGames
 }
