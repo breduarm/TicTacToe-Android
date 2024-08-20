@@ -12,6 +12,7 @@ import com.beam.tictactoexml.R
 import com.beam.tictactoexml.databinding.ItemGameBinding
 import com.beam.tictactoexml.domain.VideoGame
 import com.beam.tictactoexml.ui.formatToString
+import com.bumptech.glide.Glide
 import java.util.Locale
 
 class GamesAdapter : ListAdapter<VideoGame, GamesAdapter.GamesViewHolder>(GamesDiffCallback) {
@@ -37,7 +38,7 @@ class GamesAdapter : ListAdapter<VideoGame, GamesAdapter.GamesViewHolder>(GamesD
         fun bind(videoGame: VideoGame): Unit = with(binding) {
             name.text = videoGame.name
             rating.text = String.format(Locale.getDefault(), "%.1f", videoGame.rating)
-            // TODO : Use glide to load image
+            Glide.with(image).load(videoGame.imageUrl).into(image) // TODO move this into a separate class
             releaseDate.text = videoGame.releaseDate.formatToString()
         }
     }
