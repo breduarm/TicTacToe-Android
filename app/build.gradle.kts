@@ -64,6 +64,10 @@ dependencies {
     // Glide
     implementation(libs.glide)
 
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
