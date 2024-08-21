@@ -13,4 +13,14 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_score" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/empty_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="48dp"
+        android:text="@string/empty_scoreboard"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 </FrameLayout>

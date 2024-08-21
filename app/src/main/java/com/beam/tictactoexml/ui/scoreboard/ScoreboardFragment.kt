@@ -2,6 +2,7 @@ package com.beam.tictactoexml.ui.scoreboard
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -33,6 +34,7 @@ class ScoreboardFragment : Fragment(R.layout.fragment_scoreboard) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.state.collect { uiState ->
                     adapter.submitList(uiState.scores)
+                    emptyMessage.isVisible = uiState.scores.isEmpty()
                 }
             }
         }
