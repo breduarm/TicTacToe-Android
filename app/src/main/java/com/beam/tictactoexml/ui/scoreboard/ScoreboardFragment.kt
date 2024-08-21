@@ -21,6 +21,8 @@ class ScoreboardFragment : Fragment(R.layout.fragment_scoreboard) {
         super.onViewCreated(view, savedInstanceState)
 
         FragmentScoreboardBinding.bind(view).init()
+
+        viewModel.onUiReady()
     }
 
     private fun FragmentScoreboardBinding.init() {
@@ -29,7 +31,9 @@ class ScoreboardFragment : Fragment(R.layout.fragment_scoreboard) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.scores.collect(adapter::submitList)
+                viewModel.state.collect { uiState ->
+                    adapter.submitList(uiState.scores)
+                }
             }
         }
     }
