@@ -33,3 +33,5 @@ private fun TicTacToe.isBoardComplete(): Boolean =
     board.flatten().none { it == Empty }
 
 fun TicTacToe.numberOfMoves(): Int = board.flatten().count { it != Empty }
+
+fun TicTacToe.isEmpty(): Boolean = numberOfMoves() == 0

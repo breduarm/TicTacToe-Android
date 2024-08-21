@@ -6,6 +6,7 @@ import com.beam.tictactoexml.domain.GameState
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.domain.Winner
 import com.beam.tictactoexml.domain.findWinner
+import com.beam.tictactoexml.domain.isEmpty
 import com.beam.tictactoexml.usecases.GetCurrentBoardUseCase
 import com.beam.tictactoexml.usecases.MakeBoardMoveUseCase
 import com.beam.tictactoexml.usecases.ResetBoardUseCase
@@ -36,8 +37,8 @@ class BoardViewModel @Inject constructor(
                     ticTacToe = board,
                     gameState = when {
                         winner != null -> GameState.Finished(winner)
-                        userStartedGame -> GameState.InProgress
-                        else -> GameState.NotStarted
+                        board.isEmpty() && !userStartedGame -> GameState.NotStarted
+                        else -> GameState.InProgress
                     }
                 )
             }
@@ -58,6 +59,7 @@ class BoardViewModel @Inject constructor(
     fun resetGame() {
         viewModelScope.launch {
             resetBoardUseCase()
+            startGame()
         }
     }
 
