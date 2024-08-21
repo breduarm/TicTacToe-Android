@@ -1,6 +1,7 @@
 package com.beam.tictactoexml.di
 
 import android.app.Application
+import androidx.room.Room
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.data.datasource.BoardDataSource
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
@@ -8,6 +9,7 @@ import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.datasource.GamesRetrofitDataSource
 import com.beam.tictactoexml.data.datasource.ScoreDataSource
 import com.beam.tictactoexml.data.datasource.ScoreLocalDataSource
+import com.beam.tictactoexml.data.local.AppDataBase
 import com.beam.tictactoexml.data.remote.GamesService
 import dagger.Binds
 import dagger.Module
@@ -36,6 +38,10 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create()
+
+    @Provides
+    @Singleton
+    fun provideBoardDao(db: AppDataBase) = db.boardDao()
 }
 
 @Module
@@ -46,6 +52,14 @@ object AppExtrasModule {
     @Singleton
     @ApiUrl
     fun provideApiUrl(): String = "https://api.rawg.io/api/"
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application) = Room.databaseBuilder(
+        context = app,
+        klass = AppDataBase::class.java,
+        name = "tic-tac-toe-db",
+    ).build()
 }
 
 @Module

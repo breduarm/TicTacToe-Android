@@ -1,10 +1,10 @@
 package com.beam.tictactoexml.data.datasource
 
-import com.beam.tictactoexml.domain.Move
+import com.beam.tictactoexml.data.local.dao.BoardDao
+import com.beam.tictactoexml.data.local.entity.MoveEntity
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.domain.move
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,21 +16,22 @@ interface BoardLocalDataSource {
 }
 
 @Singleton
-class BoardDataSource @Inject constructor() : BoardLocalDataSource {
-    private val currBoard: MutableStateFlow<List<Move>> = MutableStateFlow(emptyList())
+class BoardDataSource @Inject constructor(
+    private val boardDao: BoardDao,
+) : BoardLocalDataSource {
 
     override val board: Flow<TicTacToe>
-        get() = currBoard.map { it.toTicTacToe() }
+        get() = boardDao.getBoard().map { it.toTicTacToe() }
 
     override suspend fun saveMove(row: Int, column: Int) {
-        currBoard.value += Move(row, column)
+        boardDao.saveMove(MoveEntity(0, row, column))
     }
 
     override suspend fun reset() {
-        currBoard.value = emptyList()
+        boardDao.reset()
     }
 }
 
-fun List<Move>.toTicTacToe(): TicTacToe = fold(TicTacToe()) { acc, move ->
+fun List<MoveEntity>.toTicTacToe(): TicTacToe = fold(TicTacToe()) { acc, move ->
     acc.move(move.row, move.column)
 }
