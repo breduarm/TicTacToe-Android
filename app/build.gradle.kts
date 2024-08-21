@@ -68,6 +68,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
 
+    // Room
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+
     // Testing
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
