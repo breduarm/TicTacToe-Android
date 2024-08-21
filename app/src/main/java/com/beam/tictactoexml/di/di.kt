@@ -4,8 +4,6 @@ import android.app.Application
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.data.datasource.BoardDataSource
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
-import com.beam.tictactoexml.data.datasource.GamesDataSource
-import com.beam.tictactoexml.data.datasource.GamesLocalDataSource
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.datasource.GamesRetrofitDataSource
 import com.beam.tictactoexml.data.datasource.ScoreDataSource
@@ -59,9 +57,6 @@ abstract class AppDataModule {
 
     @Binds
     abstract fun bindScoreDataSource(impl: ScoreDataSource): ScoreLocalDataSource
-
-    @Binds
-    abstract fun bindGamesDataSource(impl: GamesDataSource): GamesLocalDataSource
 
     @Binds
     abstract fun bindRemoteGamesDataSource(impl: GamesRetrofitDataSource): GamesRemoteDataSource
