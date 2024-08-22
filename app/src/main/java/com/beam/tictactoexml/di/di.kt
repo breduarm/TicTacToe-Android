@@ -3,7 +3,7 @@ package com.beam.tictactoexml.di
 import android.app.Application
 import androidx.room.Room
 import com.beam.tictactoexml.R
-import com.beam.tictactoexml.data.datasource.BoardDataSource
+import com.beam.tictactoexml.data.datasource.BoardRoomDataSource
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.datasource.GamesRetrofitDataSource
@@ -67,7 +67,7 @@ object AppExtrasModule {
 abstract class AppDataModule {
 
     @Binds
-    abstract fun bindBoardDataSource(impl: BoardDataSource): BoardLocalDataSource
+    abstract fun bindBoardDataSource(impl: BoardRoomDataSource): BoardLocalDataSource
 
     @Binds
     abstract fun bindScoreDataSource(impl: ScoreDataSource): ScoreLocalDataSource

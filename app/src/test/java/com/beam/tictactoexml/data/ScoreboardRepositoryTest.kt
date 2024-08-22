@@ -8,7 +8,6 @@ import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit4.MockKRule
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -18,7 +17,6 @@ import org.junit.Rule
 import org.junit.Test
 import java.util.Date
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ScoreboardRepositoryTest  {
 
     @get:Rule

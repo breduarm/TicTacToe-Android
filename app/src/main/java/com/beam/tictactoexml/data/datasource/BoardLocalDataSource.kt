@@ -16,7 +16,7 @@ interface BoardLocalDataSource {
 }
 
 @Singleton
-class BoardDataSource @Inject constructor(
+class BoardRoomDataSource @Inject constructor(
     private val boardDao: BoardDao,
 ) : BoardLocalDataSource {
 
