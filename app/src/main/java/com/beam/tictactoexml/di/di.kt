@@ -7,7 +7,7 @@ import com.beam.tictactoexml.data.datasource.BoardRoomDataSource
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.datasource.GamesRetrofitDataSource
-import com.beam.tictactoexml.data.datasource.ScoreDataSource
+import com.beam.tictactoexml.data.datasource.ScoreRoomDataSource
 import com.beam.tictactoexml.data.datasource.ScoreLocalDataSource
 import com.beam.tictactoexml.data.local.AppDataBase
 import com.beam.tictactoexml.data.remote.GamesService
@@ -42,6 +42,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideBoardDao(db: AppDataBase) = db.boardDao()
+
+    @Provides
+    @Singleton
+    fun provideScoreDao(db: AppDataBase) = db.scoreDao()
 }
 
 @Module
@@ -70,7 +74,7 @@ abstract class AppDataModule {
     abstract fun bindBoardDataSource(impl: BoardRoomDataSource): BoardLocalDataSource
 
     @Binds
-    abstract fun bindScoreDataSource(impl: ScoreDataSource): ScoreLocalDataSource
+    abstract fun bindScoreDataSource(impl: ScoreRoomDataSource): ScoreLocalDataSource
 
     @Binds
     abstract fun bindRemoteGamesDataSource(impl: GamesRetrofitDataSource): GamesRemoteDataSource
