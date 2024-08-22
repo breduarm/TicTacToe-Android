@@ -42,6 +42,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideBoardDao(db: AppDataBase) = db.boardDao()
+
+    @Provides
+    @Singleton
+    fun provideScoreDao(db: AppDataBase) = db.scoreDao()
 }
 
 @Module
