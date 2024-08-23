@@ -1,6 +1,6 @@
 package com.beam.tictactoexml.usecases
 
-import com.beam.tictactoexml.data.ScoreboardRepository
+import com.beam.tictactoexml.data.repository.ScoreboardRepository
 import com.beam.tictactoexml.domain.Score
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

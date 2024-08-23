@@ -1,6 +1,6 @@
 package com.beam.tictactoexml.usecases
 
-import com.beam.tictactoexml.data.BoardRepository
+import com.beam.tictactoexml.data.repository.BoardRepository
 import javax.inject.Inject
 
 class GetCurrentBoardUseCase @Inject constructor(

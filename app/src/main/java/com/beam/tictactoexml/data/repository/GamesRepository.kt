@@ -1,4 +1,4 @@
-package com.beam.tictactoexml.data
+package com.beam.tictactoexml.data.repository
 
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.domain.VideoGame
