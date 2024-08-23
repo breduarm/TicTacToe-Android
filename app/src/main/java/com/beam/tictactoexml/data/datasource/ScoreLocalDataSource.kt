@@ -1,7 +1,8 @@
 package com.beam.tictactoexml.data.datasource
 
 import com.beam.tictactoexml.data.local.dao.ScoreDao
-import com.beam.tictactoexml.data.local.entity.ScoreEntity
+import com.beam.tictactoexml.data.local.entity.mapper.toEntity
+import com.beam.tictactoexml.data.local.entity.mapper.toScore
 import com.beam.tictactoexml.domain.Score
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -25,16 +26,3 @@ class ScoreRoomDataSource @Inject constructor(
         scoreDao.save(score.toEntity())
     }
 }
-
-// TODO: Move those into a mapper file
-private fun ScoreEntity.toScore(): Score = Score(
-    winner = winner,
-    numberOfMoves = numberOfMoves,
-    date = date,
-)
-
-private fun Score.toEntity(): ScoreEntity = ScoreEntity(
-    winner = winner,
-    numberOfMoves = numberOfMoves,
-    date = date,
-)
