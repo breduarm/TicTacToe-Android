@@ -23,7 +23,7 @@ class ScoreboardRepositoryTest  {
     val rule = MockKRule(this)
 
     @MockK
-    lateinit var localDataSource: ScoreLocalDataSource
+    private lateinit var localDataSource: ScoreLocalDataSource
 
     private lateinit var scoreboardRepository: ScoreboardRepository
 
