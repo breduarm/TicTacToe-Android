@@ -27,7 +27,7 @@ roomCompiler = "2.6.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-coroutinesTest = "1.6.0"
+coroutinesTest = "1.9.0-RC"
 mockk = "1.13.12"
 
 [libraries]
