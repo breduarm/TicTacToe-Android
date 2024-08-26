@@ -1,7 +1,7 @@
 package com.beam.tictactoexml.ui.games
 
 import com.beam.tictactoexml.domain.VideoGame
-import com.beam.tictactoexml.testrules.CoroutineTestRule
+import com.beam.tictactoexml.testrules.CoroutinesTestRule
 import com.beam.tictactoexml.usecases.GetPopularGamesUseCase
 import io.mockk.every
 import io.mockk.mockk
@@ -19,7 +19,7 @@ import java.util.Date
 class GamesViewModelTest {
 
     @get:Rule
-    val coroutineTestRule = CoroutineTestRule()
+    val coroutineTestRule = CoroutinesTestRule()
 
     @Test
     fun `When UI is ready, then call get games`() = runTest {

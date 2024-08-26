@@ -9,7 +9,7 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class CoroutineTestRule: TestWatcher() {
+class CoroutinesTestRule: TestWatcher() {
 
     private val testDispatcher = StandardTestDispatcher()
 
