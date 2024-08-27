@@ -1,5 +1,6 @@
 package com.beam.tictactoexml.ui.board
 
+import app.cash.turbine.test
 import com.beam.tictactoexml.domain.GameState
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.testrules.CoroutinesTestRule
@@ -54,18 +55,18 @@ class BoardViewModelTest {
 
     @Test
     fun `At the beginning, the game is not started`() = runTest {
-        val expectedGameState: GameState = GameState.NotStarted
-
-        assertEquals(expectedGameState, viewModel.state.value.gameState)
+        viewModel.state.test {
+            assertEquals(GameState.NotStarted, awaitItem().gameState)
+        }
     }
 
     @Test
     fun `When start game is called, then game state is InProgress`() = runTest {
-        val expectedGameState: GameState = GameState.InProgress
-
-        viewModel.startGame()
-
-        assertEquals(expectedGameState, viewModel.state.value.gameState)
+        viewModel.state.test {
+            assertEquals(GameState.NotStarted, awaitItem().gameState)
+            viewModel.startGame()
+            assertEquals(GameState.InProgress, awaitItem().gameState)
+        }
     }
 
     @Test
