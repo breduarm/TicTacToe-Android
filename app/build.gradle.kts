@@ -47,6 +47,10 @@ android {
     }
 }
 
+tasks.withType<Test> {
+    useJUnitPlatform()
+}
+
 dependencies {
 
     // Kotlin
@@ -79,4 +83,10 @@ dependencies {
     testImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Testing JUnit 5
+    testImplementation(libs.junit.api5)
+    testRuntimeOnly(libs.junit.engine)
+    testImplementation(libs.junit.params)
+    testRuntimeOnly(libs.junit.vintage.engine)
 }

@@ -31,6 +31,9 @@ coroutinesTest = "1.9.0-RC"
 mockk = "1.13.12"
 turbine = "1.1.0"
 
+# JUnit 5
+junitApi5 = "5.11.0"
+
 [libraries]
 # Kotlin
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -62,6 +65,12 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+
+# JUnit 5
+junit-api5 = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitApi5" }
+junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitApi5" }
+junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitApi5" }
+junit-vintage-engine = { group = "org.junit.vintage", name = "junit-vintage-engine", version.ref = "junitApi5" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
