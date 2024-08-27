@@ -1,21 +1,20 @@
 package com.beam.tictactoexml.ui.scoreboard
 
+import app.cash.turbine.test
 import com.beam.tictactoexml.domain.Score
 import com.beam.tictactoexml.domain.X
 import com.beam.tictactoexml.testrules.CoroutinesTestRule
+import com.beam.tictactoexml.ui.scoreboard.ScoreboardViewModel.UiState
 import com.beam.tictactoexml.usecases.GetAllScoresUseCase
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import java.util.Date
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class ScoreboardViewModelTest {
 
     @get:Rule
@@ -34,12 +33,10 @@ class ScoreboardViewModelTest {
         every { getAllScoresUseCase() } returns flowOf(expectedScores)
         val viewModel = ScoreboardViewModel(getAllScoresUseCase)
 
-        viewModel.onUiReady()
-
-        assertEquals(ScoreboardViewModel.UiState(), viewModel.state.value)
-
-        advanceUntilIdle()
-
-        assertEquals(ScoreboardViewModel.UiState(scores = expectedScores), viewModel.state.value)
+        viewModel.state.test {
+            assertEquals(UiState(), awaitItem())
+            viewModel.onUiReady()
+            assertEquals(UiState(scores = expectedScores), awaitItem())
+        }
     }
 }
