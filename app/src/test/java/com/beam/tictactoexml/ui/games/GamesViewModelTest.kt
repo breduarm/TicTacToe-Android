@@ -1,21 +1,18 @@
 package com.beam.tictactoexml.ui.games
 
+import app.cash.turbine.test
 import com.beam.tictactoexml.domain.VideoGame
 import com.beam.tictactoexml.testrules.CoroutinesTestRule
 import com.beam.tictactoexml.usecases.GetPopularGamesUseCase
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.advanceTimeBy
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
 import java.util.Date
 
-@OptIn(ExperimentalCoroutinesApi::class)
 class GamesViewModelTest {
 
     @get:Rule
@@ -33,22 +30,14 @@ class GamesViewModelTest {
             )
         )
         val getPopularGamesUseCase: GetPopularGamesUseCase = mockk()
-        every { getPopularGamesUseCase() } returns flow {
-            delay(2000)
-            emit(expectedGames)
-        }
+        every { getPopularGamesUseCase() } returns flowOf(expectedGames)
         val viewModel = GamesViewModel(getPopularGamesUseCase)
 
-        viewModel.onUiReady()
-
-        assertEquals(GamesViewModel.UiState(), viewModel.state.value)
-
-        advanceTimeBy(500)
-
-        assertEquals(GamesViewModel.UiState(isLoading = true), viewModel.state.value)
-
-        advanceTimeBy(2000)
-
-        assertEquals(GamesViewModel.UiState(games = expectedGames, isLoading = false), viewModel.state.value)
+        viewModel.state.test {
+            assertEquals(GamesViewModel.UiState(), awaitItem())
+            viewModel.onUiReady()
+            assertEquals(GamesViewModel.UiState(isLoading = true), awaitItem())
+            assertEquals(GamesViewModel.UiState(games = expectedGames, isLoading = false), awaitItem())
+        }
     }
 }
