@@ -13,22 +13,6 @@ import org.junit.Test
 
 class BoardRepositoryIntTest {
 
-    class BoardLocalDataSourceFake(
-        ticTacToe: TicTacToe = TicTacToe()
-    ) : BoardLocalDataSource {
-
-        private val _board = MutableStateFlow(ticTacToe)
-        override val board: Flow<TicTacToe> = _board
-
-        override suspend fun saveMove(row: Int, column: Int) {
-            _board.update { it.move(row, column) }
-        }
-
-        override suspend fun reset() {
-            _board.update { TicTacToe() }
-        }
-    }
-
     @Test
     fun `when board is called, then return board from local data source`() = runTest {
         val expectedBoard: TicTacToe = TicTacToe()
@@ -67,5 +51,21 @@ class BoardRepositoryIntTest {
         val actualBoard: TicTacToe = boardRepository.board.first()
 
         assertEquals(expectedBoard, actualBoard)
+    }
+
+    private class BoardLocalDataSourceFake(
+        ticTacToe: TicTacToe = TicTacToe()
+    ) : BoardLocalDataSource {
+
+        private val _board = MutableStateFlow(ticTacToe)
+        override val board: Flow<TicTacToe> = _board
+
+        override suspend fun saveMove(row: Int, column: Int) {
+            _board.update { it.move(row, column) }
+        }
+
+        override suspend fun reset() {
+            _board.update { TicTacToe() }
+        }
     }
 }
