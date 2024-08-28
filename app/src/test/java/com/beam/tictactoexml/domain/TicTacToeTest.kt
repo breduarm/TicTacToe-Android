@@ -65,7 +65,7 @@ class TicTacToeTest {
                 X
             ), // All cells in a diagonal are taken by X
             Arguments.of(
-                listOf(0 to 0, 0 to 1, 0 to 2, 1 to 0, 1 to 1, 2 to 0, 2 to 1, 2 to 2, 1 to 2,),
+                listOf(0 to 0, 0 to 1, 0 to 2, 1 to 0, 1 to 1, 2 to 0, 2 to 1, 2 to 2, 1 to 2),
                 Draw
             ), // All cells are taken but there is no winner, so the game ends in Draw
             Arguments.of(
