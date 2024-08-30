@@ -3,8 +3,8 @@ package com.beam.tictactoexml.data.datasource
 import com.beam.tictactoexml.domain.VideoGame
 
 class GamesRemoteDataSourceFake(
-    private val games: List<VideoGame>
+    private val inServerGames: List<VideoGame> = emptyList()
 ) : GamesRemoteDataSource {
 
-    override suspend fun getGames(): List<VideoGame> = games
+    override suspend fun getGames(): List<VideoGame> = inServerGames
 }
