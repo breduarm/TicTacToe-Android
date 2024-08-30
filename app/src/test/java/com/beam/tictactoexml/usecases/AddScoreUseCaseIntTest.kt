@@ -6,8 +6,6 @@ import com.beam.tictactoexml.domain.Score
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.domain.X
 import com.beam.tictactoexml.domain.move
-import io.mockk.coVerify
-import io.mockk.slot
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
