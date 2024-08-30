@@ -1,12 +1,9 @@
 package com.beam.tictactoexml.data.repository
 
-import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
+import com.beam.tictactoexml.data.datasource.BoardLocalDataSourceFake
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.domain.move
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -51,21 +48,5 @@ class BoardRepositoryIntTest {
         val actualBoard: TicTacToe = boardRepository.board.first()
 
         assertEquals(expectedBoard, actualBoard)
-    }
-
-    private class BoardLocalDataSourceFake(
-        ticTacToe: TicTacToe = TicTacToe()
-    ) : BoardLocalDataSource {
-
-        private val _board = MutableStateFlow(ticTacToe)
-        override val board: Flow<TicTacToe> = _board
-
-        override suspend fun saveMove(row: Int, column: Int) {
-            _board.update { it.move(row, column) }
-        }
-
-        override suspend fun reset() {
-            _board.update { TicTacToe() }
-        }
     }
 }
