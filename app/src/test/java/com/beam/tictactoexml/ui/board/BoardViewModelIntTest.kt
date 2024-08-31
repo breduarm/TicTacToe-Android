@@ -17,6 +17,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
@@ -24,8 +25,11 @@ import org.junit.jupiter.api.extension.ExtendWith
 @ExtendWith(CoroutinesExtension::class)
 class BoardViewModelIntTest {
 
-    private fun buildViewModel(ticTacToe: TicTacToe = TicTacToe()): BoardViewModel {
-        val boardLocalDataSource = BoardLocalDataSourceFake(ticTacToe)
+    private lateinit var viewModel: BoardViewModel
+
+    @BeforeEach
+    fun setUp() {
+        val boardLocalDataSource = BoardLocalDataSourceFake()
         val boardRepository = BoardRepository(boardLocalDataSource)
         val getCurrentBoardUseCase = GetCurrentBoardUseCase(boardRepository)
 
@@ -36,7 +40,7 @@ class BoardViewModelIntTest {
 
         val resetBoardUseCase = ResetBoardUseCase(boardRepository)
 
-        return BoardViewModel(
+        viewModel = BoardViewModel(
             getCurrentBoardUseCase,
             makeBoardMoveUseCase,
             resetBoardUseCase
@@ -45,8 +49,6 @@ class BoardViewModelIntTest {
 
     @Test
     fun `At the beginning, the game is not started`() = runTest {
-        val viewModel: BoardViewModel = buildViewModel()
-
         viewModel.state.test {
             assertEquals(GameState.NotStarted, awaitItem().gameState)
         }
@@ -54,8 +56,6 @@ class BoardViewModelIntTest {
 
     @Test
     fun `When start game is called, then game state is InProgress`() = runTest {
-        val viewModel: BoardViewModel = buildViewModel()
-
         viewModel.state.test {
             assertEquals(GameState.NotStarted, awaitItem().gameState)
             viewModel.startGame()
@@ -66,12 +66,10 @@ class BoardViewModelIntTest {
     @Test
     fun `When reset game is called, then the game is cleared`() = runTest {
         val expectedBoard = TicTacToe()
-        val inMemoryBoard: TicTacToe = TicTacToe()
-            .move(0 , 0)
-            .move(0 , 1)
-            .move(0 , 2)
-        val viewModel: BoardViewModel = buildViewModel(inMemoryBoard)
 
+        viewModel.move(0, 0)
+        viewModel.move(0, 1)
+        viewModel.move(0, 2)
         viewModel.resetGame()
         runCurrent()
         val actualBoard: TicTacToe = viewModel.state.value.ticTacToe
@@ -82,7 +80,6 @@ class BoardViewModelIntTest {
     @Test
     fun `Move is recorded by use case`() = runTest {
         val expectedBoard: TicTacToe = TicTacToe().move(1, 1)
-        val viewModel: BoardViewModel = buildViewModel()
 
         viewModel.move(1 , 1)
         runCurrent()
