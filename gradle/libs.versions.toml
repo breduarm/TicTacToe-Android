@@ -1,7 +1,7 @@
 [versions]
 # Kotlin
-agp = "8.5.1"
-kotlin = "1.9.0"
+agp = "8.5.2"
+kotlin = "1.9.22"
 coreKtx = "1.13.1"
 appcompat = "1.7.0"
 material = "1.12.0"
@@ -10,7 +10,7 @@ constraintlayout = "2.1.4"
 fragmentKtx = "1.8.2"
 
 # DI
-hilt = "2.50"
+hilt = "2.51.1"
 
 # Glide
 glide = "4.16.0"
