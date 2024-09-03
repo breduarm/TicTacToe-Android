@@ -8,9 +8,6 @@ import com.beam.tictactoexml.domain.X
 import com.beam.tictactoexml.testrules.CoroutinesTestRule
 import com.beam.tictactoexml.ui.scoreboard.ScoreboardViewModel.UiState
 import com.beam.tictactoexml.usecases.GetAllScoresUseCase
-import io.mockk.every
-import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Rule

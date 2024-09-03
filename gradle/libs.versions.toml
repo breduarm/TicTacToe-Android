@@ -34,6 +34,8 @@ turbine = "1.1.0"
 
 # JUnit 5
 junitApi5 = "5.11.0"
+androidxJunit = "1.2.1"
+espressoCoreVersion = "3.6.1"
 
 [libraries]
 # Kotlin
@@ -73,6 +75,8 @@ junit-api5 = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.
 junit-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitApi5" }
 junit-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitApi5" }
 junit-vintage-engine = { group = "org.junit.vintage", name = "junit-vintage-engine", version.ref = "junitApi5" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCoreVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -80,4 +84,5 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 
 # DI
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 

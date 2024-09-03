@@ -5,4 +5,5 @@ plugins {
 
     // DI
     alias(libs.plugins.android.hilt) apply false
+    alias(libs.plugins.android.library) apply false
 }

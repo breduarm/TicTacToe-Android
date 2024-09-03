@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "TicTacToeXml"
 include(":app")
- 
+include(":appTestShared")
