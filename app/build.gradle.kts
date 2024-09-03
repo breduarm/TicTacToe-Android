@@ -20,7 +20,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.beam.tictactoexml.di.HiltTestRunner"
     }
 
     buildTypes {
@@ -84,10 +84,12 @@ dependencies {
     testImplementation(project(":appTestShared"))
 
     // Instrumentation Test
+    androidTestImplementation(project(":appTestShared"))
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.junit.ktx)
     androidTestImplementation(libs.androidx.espresso.contrib)
-    androidTestImplementation(project(":appTestShared"))
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.android.hilt.compiler)
 
     // Testing JUnit 5
     testImplementation(libs.junit.api5)
