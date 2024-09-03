@@ -3,12 +3,12 @@ package com.beam.tictactoexml.di
 import android.app.Application
 import androidx.room.Room
 import com.beam.tictactoexml.R
-import com.beam.tictactoexml.data.datasource.BoardRoomDataSource
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
+import com.beam.tictactoexml.data.datasource.BoardRoomDataSource
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.datasource.GamesRetrofitDataSource
-import com.beam.tictactoexml.data.datasource.ScoreRoomDataSource
 import com.beam.tictactoexml.data.datasource.ScoreLocalDataSource
+import com.beam.tictactoexml.data.datasource.ScoreRoomDataSource
 import com.beam.tictactoexml.data.local.AppDataBase
 import com.beam.tictactoexml.data.remote.GamesService
 import dagger.Binds
@@ -16,6 +16,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
@@ -32,9 +34,17 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRemoteService(@ApiUrl apiUrl: String): GamesService =
+    fun provideOkHttpClient(): OkHttpClient = HttpLoggingInterceptor().run {
+        level = HttpLoggingInterceptor.Level.BODY
+        OkHttpClient.Builder().addInterceptor(this).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteService(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): GamesService =
         Retrofit.Builder()
             .baseUrl(apiUrl)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create()
@@ -48,8 +58,8 @@ object AppModule {
     fun provideScoreDao(db: AppDataBase) = db.scoreDao()
 }
 
-@Module
 @InstallIn(SingletonComponent::class)
+@Module
 object AppExtrasModule {
 
     @Provides

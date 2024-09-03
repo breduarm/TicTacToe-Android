@@ -8,12 +8,12 @@ class MockWebServerRule : TestWatcher() {
 
     lateinit var server: MockWebServer
 
-    override fun starting(description: Description?) {
+    override fun starting(description: Description) {
         server = MockWebServer()
         server.start(8080)
     }
 
-    override fun finished(description: Description?) {
+    override fun finished(description: Description) {
         server.shutdown()
     }
 }

@@ -1,14 +1,13 @@
 package com.beam.tictactoexml
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
-import com.beam.tictactoexml.data.local.dao.BoardDao
-import com.beam.tictactoexml.data.local.entity.MoveEntity
+import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.remote.MockWebServerRule
+import com.beam.tictactoexml.data.remote.fromJson
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
+import okhttp3.mockwebserver.MockResponse
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -32,7 +31,7 @@ class ExampleInstrumentedTest {
     val mockWebServerRule = MockWebServerRule()
 
     @Inject
-    lateinit var boardDao: BoardDao
+    lateinit var remoteDataSource: GamesRemoteDataSource
 
     @Before
     fun setUp() {
@@ -40,30 +39,11 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.beam.tictactoexml", appContext.packageName)
-    }
+    fun testMockWebServerWorksWithEnqueue() = runTest {
+        mockWebServerRule.server.enqueue(MockResponse().fromJson("mock_games.json"))
 
-    @Test
-    fun test2ItemsAdded() = runTest {
-        boardDao.saveMove(MoveEntity(id = 0, row = 0, column = 0))
-        boardDao.saveMove(MoveEntity(id = 0, row = 1, column = 1))
+        val response = remoteDataSource.getGames()
 
-        boardDao.getBoard().first().let {
-            assertEquals(2, it.size)
-        }
-    }
-
-    @Test
-    fun test3ItemsAdded() = runTest {
-        boardDao.saveMove(MoveEntity(id = 0, row = 0, column = 0))
-        boardDao.saveMove(MoveEntity(id = 0, row = 1, column = 1))
-        boardDao.saveMove(MoveEntity(id = 0, row = 2, column = 2))
-
-        boardDao.getBoard().first().let {
-            assertEquals(3, it.size)
-        }
+        assertEquals("Grand Theft Auto V", response[0].name)
     }
 }

@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.kotlinx.coroutines.android)
 
     // DI
     implementation(libs.android.hilt)
@@ -72,16 +73,19 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
 
+    // OkHttp
+    implementation(libs.okhttp3.loggin.interceptor)
+
     // Room
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
 
     // Unit Test
+    testImplementation(project(":appTestShared"))
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
-    testImplementation(project(":appTestShared"))
 
     // Instrumentation Test
     androidTestImplementation(project(":appTestShared"))
@@ -98,4 +102,8 @@ dependencies {
     testRuntimeOnly(libs.junit.engine)
     testImplementation(libs.junit.params)
     testRuntimeOnly(libs.junit.vintage.engine)
+}
+
+kapt {
+    correctErrorTypes = true
 }
