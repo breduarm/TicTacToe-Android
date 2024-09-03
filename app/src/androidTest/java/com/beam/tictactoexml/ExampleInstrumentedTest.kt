@@ -1,22 +1,18 @@
 package com.beam.tictactoexml
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.beam.tictactoexml.data.datasource.GamesRemoteDataSourceFake
-import com.beam.tictactoexml.data.repository.GamesRepository
-import com.beam.tictactoexml.domain.VideoGame
+import androidx.test.platform.app.InstrumentationRegistry
+import com.beam.tictactoexml.data.local.dao.BoardDao
+import com.beam.tictactoexml.data.local.entity.MoveEntity
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
-
-import org.junit.Test
-import org.junit.runner.RunWith
-
-import org.junit.Assert.*
+import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
-import java.util.Date
+import org.junit.Test
+import org.junit.runner.RunWith
 import javax.inject.Inject
 
 /**
@@ -32,10 +28,7 @@ class ExampleInstrumentedTest {
     val hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var gamesRepository: GamesRepository
-
-    @Inject
-    lateinit var dataSource: GamesRemoteDataSourceFake
+    lateinit var boardDao: BoardDao
 
     @Before
     fun setUp() {
@@ -50,22 +43,23 @@ class ExampleInstrumentedTest {
     }
 
     @Test
-    fun testHiltWorks() {
-        val expectedGames: List<VideoGame> = listOf(
-            VideoGame(
-                id = 1,
-                name = "Super Mario Bros.",
-                rating = 0.1,
-                imageUrl = "https://image.com",
-                releaseDate = Date(),
-            )
-        )
-        dataSource.inServerGames = expectedGames
+    fun test2ItemsAdded() = runTest {
+        boardDao.saveMove(MoveEntity(id = 0, row = 0, column = 0))
+        boardDao.saveMove(MoveEntity(id = 0, row = 1, column = 1))
 
-        val actualGames = runBlocking {
-            gamesRepository.remoteGames.first()
+        boardDao.getBoard().first().let {
+            assertEquals(2, it.size)
         }
+    }
 
-        assertEquals(expectedGames, actualGames)
+    @Test
+    fun test3ItemsAdded() = runTest {
+        boardDao.saveMove(MoveEntity(id = 0, row = 0, column = 0))
+        boardDao.saveMove(MoveEntity(id = 0, row = 1, column = 1))
+        boardDao.saveMove(MoveEntity(id = 0, row = 2, column = 2))
+
+        boardDao.getBoard().first().let {
+            assertEquals(3, it.size)
+        }
     }
 }
