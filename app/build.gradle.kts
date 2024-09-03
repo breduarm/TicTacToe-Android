@@ -76,14 +76,18 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
 
-    // Testing
+    // Unit Test
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
+    testImplementation(project(":appTestShared"))
+
+    // Instrumentation Test
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.junit.ktx)
     androidTestImplementation(libs.androidx.espresso.contrib)
+    androidTestImplementation(project(":appTestShared"))
 
     // Testing JUnit 5
     testImplementation(libs.junit.api5)
