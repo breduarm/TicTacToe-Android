@@ -21,10 +21,15 @@ import javax.inject.Singleton
 
 @TestInstallIn(
     components = [SingletonComponent::class],
-    replaces = [AppDataModule::class, AppExtrasModule::class],
+    replaces = [AppExtrasModule::class],
 )
 @Module
 class TestAppDataModule {
+
+    @Provides
+    @Singleton
+    @ApiUrl
+    fun provideApiUrl() = "http://localhost:8080/"
 
     @Provides
     @Singleton
@@ -35,20 +40,4 @@ class TestAppDataModule {
         .setTransactionExecutor(Dispatchers.Main.asExecutor())
         .allowMainThreadQueries()
         .build()
-
-    @Provides
-    fun provideBoardDataSource(boardDao: BoardDao): BoardLocalDataSource =
-        BoardRoomDataSource(boardDao)
-
-    @Provides
-    fun provideScoreDataSource(scoreDao: ScoreDao): ScoreLocalDataSource =
-        ScoreRoomDataSource(scoreDao)
-
-    @Provides
-    @Singleton
-    fun provideGamesRemoteDataSourceFake() = GamesRemoteDataSourceFake()
-
-    @Provides
-    @Singleton
-    fun provideGamesRemoteDataSource(fake: GamesRemoteDataSourceFake): GamesRemoteDataSource = fake
 }

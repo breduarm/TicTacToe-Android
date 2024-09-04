@@ -4,6 +4,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.beam.tictactoexml.data.local.dao.BoardDao
 import com.beam.tictactoexml.data.local.entity.MoveEntity
+import com.beam.tictactoexml.data.remote.MockWebServerRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.flow.first
@@ -24,8 +25,11 @@ import javax.inject.Inject
 @HiltAndroidTest
 class ExampleInstrumentedTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    val mockWebServerRule = MockWebServerRule()
 
     @Inject
     lateinit var boardDao: BoardDao
