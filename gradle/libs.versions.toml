@@ -41,6 +41,9 @@ junitApi5 = "5.11.0"
 # Hilt Test
 hiltAndroidTesting = "2.50"
 
+# Mock Web Server
+mockwebserver = "4.12.0"
+
 [libraries]
 # Kotlin
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -85,6 +88,9 @@ junit-vintage-engine = { group = "org.junit.vintage", name = "junit-vintage-engi
 
 # Hilt Test
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hiltAndroidTesting" }
+
+# Mock Web Server
+mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "mockwebserver" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

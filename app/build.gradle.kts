@@ -90,6 +90,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.contrib)
     androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.mockwebserver)
     kaptAndroidTest(libs.android.hilt.compiler)
 
     // Testing JUnit 5

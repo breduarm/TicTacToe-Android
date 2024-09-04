@@ -3,12 +3,10 @@ package com.beam.tictactoexml.di
 import android.app.Application
 import androidx.room.Room
 import com.beam.tictactoexml.data.datasource.BoardLocalDataSource
-import com.beam.tictactoexml.data.datasource.BoardLocalDataSourceFake
 import com.beam.tictactoexml.data.datasource.BoardRoomDataSource
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSource
 import com.beam.tictactoexml.data.datasource.GamesRemoteDataSourceFake
 import com.beam.tictactoexml.data.datasource.ScoreLocalDataSource
-import com.beam.tictactoexml.data.datasource.ScoreLocalDataSourceFake
 import com.beam.tictactoexml.data.datasource.ScoreRoomDataSource
 import com.beam.tictactoexml.data.local.AppDataBase
 import com.beam.tictactoexml.data.local.dao.BoardDao
