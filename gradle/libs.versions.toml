@@ -5,10 +5,10 @@ kotlin = "1.9.22"
 coreKtx = "1.13.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.1"
+activity = "1.9.2"
 constraintlayout = "2.1.4"
-fragmentKtx = "1.8.2"
-kotlinxCoroutinesAndroid = "1.7.3"
+fragmentKtx = "1.8.3"
+kotlinxCoroutinesAndroid = "1.8.0"
 
 # DI
 hilt = "2.51.1"
@@ -17,7 +17,7 @@ hilt = "2.51.1"
 glide = "4.16.0"
 
 # Retrofit
-retrofit = "2.9.0"
+retrofit = "2.11.0"
 retrofitConverterGson = "2.9.0"
 
 # OkHttp
