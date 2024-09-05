@@ -1,9 +1,11 @@
 package com.beam.tictactoexml.ui.board
 
+import androidx.test.espresso.IdlingRegistry
 import com.beam.tictactoexml.data.remote.MockWebServerRule
 import com.beam.tictactoexml.domain.GameState
 import com.beam.tictactoexml.domain.TicTacToe
 import com.beam.tictactoexml.domain.move
+import com.beam.tictactoexml.idlingresources.OkHttp3IdlingResource
 import com.beam.tictactoexml.testrules.CoroutinesTestRule
 import com.beam.tictactoexml.usecases.GetCurrentBoardUseCase
 import com.beam.tictactoexml.usecases.MakeBoardMoveUseCase
@@ -13,6 +15,7 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
+import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -33,6 +36,9 @@ class BoardViewModelIntTest {
     val coroutinesTestRule = CoroutinesTestRule()
 
     @Inject
+    lateinit var okHttpClient: OkHttpClient
+
+    @Inject
     lateinit var getCurrentBoardUseCase: GetCurrentBoardUseCase
 
     @Inject
@@ -46,6 +52,13 @@ class BoardViewModelIntTest {
     @Before
     fun setup() {
         hiltRule.inject()
+
+        val resource: OkHttp3IdlingResource =OkHttp3IdlingResource.create(
+            name = "OkHttp",
+            client = okHttpClient,
+        )
+        IdlingRegistry.getInstance().register(resource)
+
         viewModel = BoardViewModel(
             getCurrentBoardUseCase,
             makeBoardMoveUseCase,

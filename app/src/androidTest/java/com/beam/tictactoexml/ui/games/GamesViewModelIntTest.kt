@@ -1,11 +1,14 @@
 package com.beam.tictactoexml.ui.games
 
+import androidx.test.espresso.IdlingRegistry
 import app.cash.turbine.test
 import com.beam.tictactoexml.data.remote.MockWebServerRule
+import com.beam.tictactoexml.idlingresources.OkHttp3IdlingResource
 import com.beam.tictactoexml.usecases.GetPopularGamesUseCase
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -22,6 +25,9 @@ class GamesViewModelIntTest {
     val mockWebServerRule = MockWebServerRule()
 
     @Inject
+    lateinit var okHttpClient: OkHttpClient
+
+    @Inject
     lateinit var getPopularGamesUseCase: GetPopularGamesUseCase
 
     private lateinit var viewModel: GamesViewModel
@@ -29,6 +35,13 @@ class GamesViewModelIntTest {
     @Before
     fun setup() {
         hiltRule.inject()
+
+        val resource: OkHttp3IdlingResource = OkHttp3IdlingResource.create(
+            name = "OkHttp",
+            client = okHttpClient,
+        )
+        IdlingRegistry.getInstance().register(resource)
+
         viewModel = GamesViewModel(getPopularGamesUseCase)
     }
 
