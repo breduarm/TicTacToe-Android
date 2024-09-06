@@ -60,4 +60,25 @@ class BoardUiTest : InstrumentedTest() {
         onView(withId(R.id.btn_0_0)).check(matches(withText("X")))
         onView(withId(R.id.btn_0_1)).check(matches(withText("O")))
     }
+
+    @Test
+    fun when_game_ends_in_draw_then_message_shows_correctly() {
+        onView(withId(R.id.start_btn)).perform(click())
+
+        playFullGameInDraw()
+
+        onView(withText(R.string.draw)).check(matches(isDisplayed()))
+    }
+
+    private fun playFullGameInDraw() {
+        onView(withId(R.id.btn_0_0)).perform(click())
+        onView(withId(R.id.btn_0_1)).perform(click())
+        onView(withId(R.id.btn_0_2)).perform(click())
+        onView(withId(R.id.btn_1_0)).perform(click())
+        onView(withId(R.id.btn_1_2)).perform(click())
+        onView(withId(R.id.btn_1_1)).perform(click())
+        onView(withId(R.id.btn_2_1)).perform(click())
+        onView(withId(R.id.btn_2_2)).perform(click())
+        onView(withId(R.id.btn_2_0)).perform(click())
+    }
 }
