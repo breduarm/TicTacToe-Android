@@ -46,4 +46,18 @@ class BoardUiTest : InstrumentedTest() {
 
         onView(withId(R.id.btn_0_1)).check(matches(withText("O")))
     }
+
+    @Test
+    fun when_back_to_board_then_previous_game_is_visible() {
+        onView(withId(R.id.start_btn)).perform(click())
+        onView(withId(R.id.btn_0_0)).perform(click())
+        onView(withId(R.id.btn_0_1)).perform(click())
+        onView(withId(R.id.navigation_scoreboard)).perform(click())
+
+        onView(withId(R.id.navigation_board)).perform(click())
+
+        onView(withId(R.id.board_view)).check(matches(isDisplayed()))
+        onView(withId(R.id.btn_0_0)).check(matches(withText("X")))
+        onView(withId(R.id.btn_0_1)).check(matches(withText("O")))
+    }
 }
