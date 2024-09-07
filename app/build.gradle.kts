@@ -35,6 +35,11 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.9"
     }
 
     compileOptions {
@@ -80,6 +85,14 @@ dependencies {
     implementation(libs.room.ktx)
     kapt(libs.room.compiler)
 
+    // Compose
+    val composeBom = platform(libs.compose.bom)
+    implementation(composeBom)
+    implementation(libs.compose.material)
+    implementation(libs.compose.ui.tooling.preview)
+    debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.compose.activity)
+
     // Unit Test
     testImplementation(project(":appTestShared"))
     testImplementation(libs.junit)
@@ -97,7 +110,10 @@ dependencies {
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.turbine)
     androidTestImplementation(libs.fragment.testing)
+    androidTestImplementation(composeBom)
+    androidTestImplementation(libs.compose.ui.test.junit4)
     debugImplementation(libs.fragment.testing.manifest)
+    debugImplementation(libs.compose.ui.test.manifest)
     kaptAndroidTest(libs.android.hilt.compiler)
 
     // Testing JUnit 5

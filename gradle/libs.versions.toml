@@ -30,6 +30,10 @@ roomCompiler = "2.6.1"
 # Coroutines
 coroutinesCore = "1.9.0-RC.2"
 
+# Compose
+compose = "2024.09.00"
+composeActivity = "1.9.2"
+
 # Unit Testing
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -84,6 +88,13 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 # Coroutines
 kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutinesCore" }
 
+# Compose
+compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose" }
+compose-material = { group = "androidx.compose.material", name = "material" }
+compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
+
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" } #
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
@@ -98,6 +109,10 @@ androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso
 ## Instrumentation Fragment Test
 fragment-testing = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmentTesting" }
 fragment-testing-manifest = { group = "androidx.fragment", name = "fragment-testing-manifest", version.ref = "fragmentTesting" }
+
+## Instrumentation Compose Test
+compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 
 # JUnit 5
 junit-api5 = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitApi5" }
