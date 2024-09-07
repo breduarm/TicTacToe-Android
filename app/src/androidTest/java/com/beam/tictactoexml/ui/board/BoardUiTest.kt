@@ -3,6 +3,7 @@ package com.beam.tictactoexml.ui.board
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.hasChildCount
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -80,5 +81,28 @@ class BoardUiTest : InstrumentedTest() {
         onView(withId(R.id.btn_2_1)).perform(click())
         onView(withId(R.id.btn_2_2)).perform(click())
         onView(withId(R.id.btn_2_0)).perform(click())
+    }
+
+    @Test
+    fun when_game_ends_with_winner_and_move_to_scoreboard_and_back_the_score_is_not_duplicated() {
+        onView(withId(R.id.start_btn)).perform(click())
+        playFullGameAndXWins()
+
+        onView(withId(R.id.navigation_scoreboard)).perform(click())
+        onView(withId(R.id.score)).check(matches(hasChildCount(1)))
+        onView(withId(R.id.navigation_board)).perform(click())
+        onView(withId(R.id.navigation_scoreboard)).perform(click())
+        onView(withId(R.id.navigation_board)).perform(click())
+        onView(withId(R.id.navigation_scoreboard)).perform(click())
+
+        onView(withId(R.id.score)).check(matches(hasChildCount(1)))
+    }
+
+    private fun playFullGameAndXWins() {
+        onView(withId(R.id.btn_0_0)).perform(click())
+        onView(withId(R.id.btn_1_0)).perform(click())
+        onView(withId(R.id.btn_0_1)).perform(click())
+        onView(withId(R.id.btn_1_1)).perform(click())
+        onView(withId(R.id.btn_0_2)).perform(click())
     }
 }
