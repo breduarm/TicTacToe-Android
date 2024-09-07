@@ -96,6 +96,8 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.fragment.testing)
+    debugImplementation(libs.fragment.testing.manifest)
     kaptAndroidTest(libs.android.hilt.compiler)
 
     // Testing JUnit 5

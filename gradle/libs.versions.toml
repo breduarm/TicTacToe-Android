@@ -30,17 +30,22 @@ roomCompiler = "2.6.1"
 # Coroutines
 coroutinesCore = "1.9.0-RC.2"
 
-# Testing
+# Unit Testing
 junit = "4.13.2"
 junitVersion = "1.2.1"
 testRules = "1.6.1"
-espressoCore = "3.6.1"
 coroutinesTest = "1.9.0-RC.2"
 mockk = "1.13.12"
 turbine = "1.1.0"
 
 # JUnit 5
 junitApi5 = "5.11.0"
+
+# Instrumentation Test
+espressoContrib = "3.6.1"
+
+## Instrumentation Fragment Test
+fragmentTesting = "1.6.2"
 
 # Hilt Test
 hiltAndroidTesting = "2.50"
@@ -83,10 +88,16 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 junit = { group = "junit", name = "junit", version.ref = "junit" } #
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitVersion" }
-androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoCore" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+
+# Instrumentation Test
+androidx-espresso-contrib = { group = "androidx.test.espresso", name = "espresso-contrib", version.ref = "espressoContrib" }
+
+## Instrumentation Fragment Test
+fragment-testing = { group = "androidx.fragment", name = "fragment-testing", version.ref = "fragmentTesting" }
+fragment-testing-manifest = { group = "androidx.fragment", name = "fragment-testing-manifest", version.ref = "fragmentTesting" }
 
 # JUnit 5
 junit-api5 = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitApi5" }
