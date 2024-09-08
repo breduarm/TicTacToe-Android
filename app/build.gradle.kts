@@ -92,6 +92,7 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.compose.activity)
+    implementation(libs.compose.navigation)
 
     // Unit Test
     testImplementation(project(":appTestShared"))
