@@ -35,6 +35,9 @@ compose = "2024.09.00"
 composeActivity = "1.9.2"
 composeNavigation = "2.8.0"
 
+# Icons
+materialIconsExtended = "1.7.0"
+
 # Unit Testing
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -97,6 +100,9 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 
+# Icons
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIconsExtended"}
+
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" } #
 androidx-test-rules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
@@ -135,4 +141,3 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 # DI
 android-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-

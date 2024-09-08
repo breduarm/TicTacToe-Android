@@ -1,4 +1,4 @@
-package com.beam.tictactoexml.ui.theme
+package com.beam.tictactoexml.composeui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

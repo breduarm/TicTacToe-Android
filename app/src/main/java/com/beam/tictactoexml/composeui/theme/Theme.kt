@@ -1,4 +1,4 @@
-package com.beam.tictactoexml.ui.theme
+package com.beam.tictactoexml.composeui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

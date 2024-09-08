@@ -94,6 +94,9 @@ dependencies {
     implementation(libs.compose.activity)
     implementation(libs.compose.navigation)
 
+    // Icons
+    implementation(libs.material.icons.extended)
+
     // Unit Test
     testImplementation(project(":appTestShared"))
     testImplementation(libs.junit)
