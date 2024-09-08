@@ -11,25 +11,33 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.composeui.navigation.NavTab
-import com.beam.tictactoexml.composeui.screens.board.BoardScreen
+import com.beam.tictactoexml.composeui.navigation.Navigation
+import com.beam.tictactoexml.composeui.navigation.navigateToTab
 
 @Composable
 fun HomeScreen() {
+    val navController: NavHostController = rememberNavController()
+    val currentRoute: String =
+        navController.currentBackStackEntryAsState().value?.destination?.route.orEmpty()
+
     Scaffold(
         topBar = {
             CustomTopAppBar()
         },
         bottomBar = {
             BottomNavigationAppBar(
-                currentRoute = "game",
-                onNavItemClick = { }
+                currentRoute = currentRoute,
+                onNavTabClick = navController::navigateToTab
             )
         }
     ) { innerPadding ->
         Box(Modifier.padding(innerPadding)) {
-            BoardScreen()
+            Navigation(navController)
         }
     }
 }
@@ -42,13 +50,13 @@ fun CustomTopAppBar() {
 }
 
 @Composable
-fun BottomNavigationAppBar(currentRoute: String, onNavItemClick: (String) -> Unit) {
+fun BottomNavigationAppBar(currentRoute: String, onNavTabClick: (NavTab) -> Unit) {
     BottomNavigation {
         NavTab.entries.forEach { tab ->
             val title: String = stringResource(id = tab.title)
             BottomNavigationItem(
                 selected = currentRoute.contains(tab.route),
-                onClick = { onNavItemClick("") },
+                onClick = { onNavTabClick(tab) },
                 icon = { Icon(imageVector = tab.icon, contentDescription = title) },
                 label = { Text(text = title) }
             )
