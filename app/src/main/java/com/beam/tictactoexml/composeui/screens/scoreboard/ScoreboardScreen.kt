@@ -60,7 +60,7 @@ fun ScoreItem(score: Score) {
 
 @Preview(showSystemUi = true)
 @Composable
-fun ScoreboardScreenPreview(modifier: Modifier = Modifier) {
+fun ScoreboardScreenPreview() {
     val scoresMock: List<Score> = listOf(
         Score(winner = X, numberOfMoves = 10, date = Date()),
         Score(winner = O, numberOfMoves = 8, date = Date()),
