@@ -16,6 +16,9 @@ hilt = "2.51.1"
 # Glide
 glide = "4.16.0"
 
+# Coil
+coil = "2.5.0"
+
 # Retrofit
 retrofit = "2.11.0"
 retrofitConverterGson = "2.9.0"
@@ -78,6 +81,9 @@ android-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-comp
 
 # Glide
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+
+# Coil
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Retrofit
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
