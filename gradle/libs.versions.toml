@@ -33,6 +33,7 @@ coroutinesCore = "1.9.0-RC.2"
 # Compose
 compose = "2024.09.00"
 composeActivity = "1.9.2"
+composeHiltNavigation = "1.2.0"
 composeNavigation = "2.8.0"
 
 # Icons
@@ -98,6 +99,7 @@ compose-material = { group = "androidx.compose.material", name = "material" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "composeActivity" }
+compose-hilt-navigation = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHiltNavigation" }
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
 
 # Icons
