@@ -1,6 +1,7 @@
 package com.beam.tictactoexml.composeui.screens.board
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -44,7 +45,7 @@ fun BoardContent(
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when(state.gameState) {
             GameState.NotStarted -> GameNotStarted(onStartClick)
-            GameState.InProgress -> GameInProgress(ticTacToe = state.ticTacToe)
+            GameState.InProgress -> GameInProgress(ticTacToe = state.ticTacToe, onCellClick = onCellClick)
             is GameState.Finished -> TODO()
         }
     }
@@ -67,42 +68,35 @@ fun GameNotStarted(onStartClick: () -> Unit) {
 }
 
 @Composable
-fun GameInProgress(ticTacToe: TicTacToe) {
-    Board(ticTacToe)
+fun GameInProgress(ticTacToe: TicTacToe, onCellClick: (Int, Int) -> Unit) {
+    Board(ticTacToe, onCellClick)
 }
 
 @Composable
-fun Board(ticTacToe: TicTacToe) {
+fun Board(ticTacToe: TicTacToe, onCellClick: (Int, Int) -> Unit) {
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize(),
     ) {
-        Row {
-            Cell(ticTacToe.board[0][0])
-            Cell(ticTacToe.board[0][1])
-            Cell(ticTacToe.board[0][2])
-        }
-        Row {
-            Cell(ticTacToe.board[1][0])
-            Cell(ticTacToe.board[1][1])
-            Cell(ticTacToe.board[1][2])
-        }
-        Row {
-            Cell(ticTacToe.board[2][0])
-            Cell(ticTacToe.board[2][1])
-            Cell(ticTacToe.board[2][2])
+        ticTacToe.board.forEachIndexed { rowIndex, row ->
+            Row {
+                row.forEachIndexed { columnIndex, cellValue ->
+                    Cell(cellValue) { onCellClick(rowIndex, columnIndex) }
+                }
+            }
         }
     }
 }
 
 @Composable
-fun Cell(cellValue: CellValue) {
+fun Cell(cellValue: CellValue, onClick: () -> Unit) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
             .size(100.dp)
             .border(1.dp, Color.Black)
+            .clickable(onClick = onClick)
     ) {
         Text(text = cellValue.toString(), style = MaterialTheme.typography.h5)
     }
@@ -112,7 +106,8 @@ fun Cell(cellValue: CellValue) {
 @Composable
 fun BoardScreenPreview(modifier: Modifier = Modifier) {
     val stateMock = BoardViewModel.UiState(
-        ticTacToe = TicTacToe().move(0, 0).move(0, 1)
+        ticTacToe = TicTacToe().move(0, 0).move(0, 1),
+        gameState = GameState.InProgress,
     )
 
     BoardContent(
