@@ -25,9 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.beam.tictactoexml.R
 import com.beam.tictactoexml.domain.CellValue
+import com.beam.tictactoexml.domain.Draw
 import com.beam.tictactoexml.domain.Empty
 import com.beam.tictactoexml.domain.GameState
+import com.beam.tictactoexml.domain.O
 import com.beam.tictactoexml.domain.TicTacToe
+import com.beam.tictactoexml.domain.Winner
+import com.beam.tictactoexml.domain.X
 import com.beam.tictactoexml.domain.move
 import com.beam.tictactoexml.ui.board.BoardViewModel
 
@@ -48,12 +52,16 @@ fun BoardContent(
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         when (state.gameState) {
             GameState.NotStarted -> GameNotStarted(onStartClick)
+
             GameState.InProgress -> GameInProgress(
                 ticTacToe = state.ticTacToe,
-                onCellClick = onCellClick
+                onCellClick = onCellClick,
             )
 
-            is GameState.Finished -> TODO()
+            is GameState.Finished -> GameFinished(
+                winner = state.gameState.winner,
+                onPlayAgainClick = onPlayAgainClick,
+            )
         }
     }
 }
@@ -77,6 +85,25 @@ fun GameNotStarted(onStartClick: () -> Unit) {
 @Composable
 fun GameInProgress(ticTacToe: TicTacToe, onCellClick: (Int, Int) -> Unit) {
     Board(ticTacToe, onCellClick)
+}
+
+@Composable
+fun GameFinished(winner: Winner, onPlayAgainClick: () -> Unit) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Text(
+            text = when (winner) {
+                X, O -> stringResource(R.string.winner, winner.toString())
+                Draw -> stringResource(R.string.draw)
+            },
+            style = MaterialTheme.typography.h5
+        )
+        Button(onClick = onPlayAgainClick) {
+            Text(text = stringResource(id = R.string.play_again).uppercase())
+        }
+    }
 }
 
 @Composable
