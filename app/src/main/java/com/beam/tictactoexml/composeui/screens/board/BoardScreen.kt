@@ -19,6 +19,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -106,18 +107,25 @@ fun GameFinished(winner: Winner, onPlayAgainClick: () -> Unit) {
     }
 }
 
+const val BOARD_TEST_TAG = "board"
+const val CELL_TEST_TAG = "cell"
+
 @Composable
 fun Board(ticTacToe: TicTacToe, onCellClick: (Int, Int) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(32.dp),
+            .padding(32.dp)
+            .testTag(BOARD_TEST_TAG),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ticTacToe.board.forEachIndexed { rowIndex, row ->
             Row {
                 row.forEachIndexed { columnIndex, cellValue ->
-                    Cell(cellValue) { onCellClick(rowIndex, columnIndex) }
+                    Cell(
+                        cellValue = cellValue,
+                        modifier = Modifier.testTag(CELL_TEST_TAG + rowIndex + columnIndex)
+                    ) { onCellClick(rowIndex, columnIndex) }
                 }
             }
         }
@@ -125,10 +133,14 @@ fun Board(ticTacToe: TicTacToe, onCellClick: (Int, Int) -> Unit) {
 }
 
 @Composable
-fun RowScope.Cell(cellValue: CellValue, onClick: () -> Unit) {
+fun RowScope.Cell(
+    cellValue: CellValue,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier
+        modifier = modifier
             .clickable(onClick = onClick, enabled = cellValue == Empty)
             .border(1.dp, color = MaterialTheme.colors.onBackground)
             .weight(1f)
