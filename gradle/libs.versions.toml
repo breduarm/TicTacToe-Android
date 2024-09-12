@@ -129,6 +129,7 @@ fragment-testing-manifest = { group = "androidx.fragment", name = "fragment-test
 ## Instrumentation Compose Test
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
 
 # JUnit 5
 junit-api5 = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitApi5" }

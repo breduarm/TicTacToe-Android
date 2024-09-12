@@ -50,6 +50,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{LICENSE-notice.md,LICENSE.md}"
+        }
+    }
 }
 
 tasks.withType<Test> {
@@ -120,6 +126,7 @@ dependencies {
     androidTestImplementation(libs.fragment.testing)
     androidTestImplementation(composeBom)
     androidTestImplementation(libs.compose.ui.test.junit4)
+    androidTestImplementation(libs.mockk.android)
     debugImplementation(libs.fragment.testing.manifest)
     debugImplementation(libs.compose.ui.test.manifest)
     kaptAndroidTest(libs.android.hilt.compiler)
