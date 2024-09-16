@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TicTacToeXml"
+rootProject.name = "TicTacToe"
 include(":app")
 include(":appTestShared")

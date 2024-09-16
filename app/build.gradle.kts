@@ -10,17 +10,17 @@ plugins {
 }
 
 android {
-    namespace = "com.beam.tictactoexml"
+    namespace = "com.beam.tictactoe"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.beam.tictactoexml"
+        applicationId = "com.beam.tictactoe"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.beam.tictactoexml.di.HiltTestRunner"
+        testInstrumentationRunner = "com.beam.tictactoe.di.HiltTestRunner"
     }
 
     buildTypes {
