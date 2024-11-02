@@ -1,6 +1,6 @@
 [versions]
 # Kotlin
-agp = "8.5.2"
+agp = "8.8.0"
 kotlin = "1.9.22"
 coreKtx = "1.13.1"
 appcompat = "1.7.0"
